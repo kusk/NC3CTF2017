@@ -1,0 +1,29 @@
+#!/bin/sh
+mkfs.cramfs endelig igen
+dd if=/dev/zero of=og bs=1024 count=20000
+mkfs.minix og
+sudo mount -o loop og mnt
+sudo mv igen mnt
+sudo umount mnt
+zip igen.zip og
+rm -rf og
+mv igen.zip igen
+rm -rf og
+dd if=/dev/zero of=og bs=1024 count=20001
+mkfs.hfsplus og
+sudo mount -o loop og mnt
+sudo mv igen mnt
+sudo umount mnt
+dd if=/dev/zero of=igen bs=1024 count=20002
+mkfs.xfs igen
+sudo mount -o loop igen mnt
+zip og.zip og
+rm -rf og
+mv og.zip og
+sudo mv og mnt
+sudo umount mnt
+zip igen.zip igen
+rm -rf igen
+mv igen.zip igen
+cd ..
+cat one.jpg filesystems/igen > ny.jpg
